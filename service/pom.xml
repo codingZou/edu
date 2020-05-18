@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>service_lecturer</module>
-        <module>service-oss</module>
+        <module>service_oss</module>
     </modules>
 
     <dependencies>

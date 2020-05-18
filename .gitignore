@@ -32,3 +32,16 @@ build/
 
 ### application.yml ###
 application.yml
+/mvnw
+/mvnw.cmd
+.mvn/
+common/common_until/src/main/resources/
+common/common_until/src/test/
+common/service_base/src/main/resources/
+common/service_base/src/test/
+mvnw
+mvnw.cmd
+service/service-oss/src/test/
+/edu_parent.iml
+/service/service-oss/service-oss.iml
+/HELP.md
