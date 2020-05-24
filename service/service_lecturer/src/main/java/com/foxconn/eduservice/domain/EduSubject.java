@@ -1,4 +1,4 @@
-package com.foxconn.lecturer.domain;
+package com.foxconn.eduservice.domain;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

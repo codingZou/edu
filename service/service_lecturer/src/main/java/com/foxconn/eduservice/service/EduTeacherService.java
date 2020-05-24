@@ -1,6 +1,6 @@
-package com.foxconn.lecturer.service;
+package com.foxconn.eduservice.service;
 
-import com.foxconn.lecturer.domain.EduTeacher;
+import com.foxconn.eduservice.domain.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

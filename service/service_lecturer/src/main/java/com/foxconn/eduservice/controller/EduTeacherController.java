@@ -1,11 +1,11 @@
-package com.foxconn.lecturer.controller;
+package com.foxconn.eduservice.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.foxconn.lecturer.domain.EduTeacher;
-import com.foxconn.lecturer.domain.vo.TeacherQuery;
-import com.foxconn.lecturer.service.EduTeacherService;
+import com.foxconn.eduservice.domain.EduTeacher;
+import com.foxconn.eduservice.domain.vo.TeacherQuery;
+import com.foxconn.eduservice.service.EduTeacherService;
 import com.foxconn.util.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

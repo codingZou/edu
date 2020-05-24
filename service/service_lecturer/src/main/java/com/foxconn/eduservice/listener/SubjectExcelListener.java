@@ -1,11 +1,11 @@
-package com.foxconn.lecturer.listener;
+package com.foxconn.eduservice.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.foxconn.lecturer.domain.EduSubject;
-import com.foxconn.lecturer.domain.excel.SubjectData;
-import com.foxconn.lecturer.service.EduSubjectService;
+import com.foxconn.eduservice.domain.EduSubject;
+import com.foxconn.eduservice.domain.excel.SubjectData;
+import com.foxconn.eduservice.service.EduSubjectService;
 import com.foxconn.servicebase.exception.BaseExceptionHandler;
 
 /**

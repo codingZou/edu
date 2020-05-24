@@ -1,15 +1,15 @@
-package com.foxconn.lecturer.service.impl;
+package com.foxconn.eduservice.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.foxconn.lecturer.domain.EduSubject;
-import com.foxconn.lecturer.domain.excel.SubjectData;
-import com.foxconn.lecturer.domain.vo.SubjectOneVo;
-import com.foxconn.lecturer.domain.vo.SubjectTwoVo;
-import com.foxconn.lecturer.listener.SubjectExcelListener;
-import com.foxconn.lecturer.mapper.EduSubjectMapper;
-import com.foxconn.lecturer.service.EduSubjectService;
+import com.foxconn.eduservice.domain.EduSubject;
+import com.foxconn.eduservice.domain.excel.SubjectData;
+import com.foxconn.eduservice.domain.vo.SubjectOneVo;
+import com.foxconn.eduservice.domain.vo.SubjectTwoVo;
+import com.foxconn.eduservice.listener.SubjectExcelListener;
+import com.foxconn.eduservice.mapper.EduSubjectMapper;
+import com.foxconn.eduservice.service.EduSubjectService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

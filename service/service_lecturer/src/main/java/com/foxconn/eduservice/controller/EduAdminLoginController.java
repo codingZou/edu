@@ -1,4 +1,4 @@
-package com.foxconn.lecturer.controller;
+package com.foxconn.eduservice.controller;
 
 import com.foxconn.util.Result;
 import org.springframework.web.bind.annotation.*;

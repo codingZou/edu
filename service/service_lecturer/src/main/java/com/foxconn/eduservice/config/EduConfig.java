@@ -1,4 +1,4 @@
-package com.foxconn.lecturer.config;
+package com.foxconn.eduservice.config;
 
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.foxconn.lecturer.mapper")
+@MapperScan("com.foxconn.eduservice.mapper")
 public class EduConfig {
     /**
      * 逻辑删除插件

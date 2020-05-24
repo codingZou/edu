@@ -1,4 +1,4 @@
-package com.foxconn.lecturer.domain.excel;
+package com.foxconn.eduservice.domain.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;

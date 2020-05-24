@@ -1,8 +1,8 @@
-package com.foxconn.lecturer.controller;
+package com.foxconn.eduservice.controller;
 
 
-import com.foxconn.lecturer.domain.vo.SubjectOneVo;
-import com.foxconn.lecturer.service.EduSubjectService;
+import com.foxconn.eduservice.domain.vo.SubjectOneVo;
+import com.foxconn.eduservice.service.EduSubjectService;
 import com.foxconn.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.foxconn.lecturer.domain.vo;
+package com.foxconn.eduservice.domain.vo;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.foxconn.lecturer.mapper;
+package com.foxconn.eduservice.mapper;
 
-import com.foxconn.lecturer.domain.EduTeacher;
+import com.foxconn.eduservice.domain.EduTeacher;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
