@@ -7,6 +7,7 @@ import com.foxconn.eduservice.domain.vo.CourseInfoVo;
 import com.foxconn.eduservice.mapper.EduCourseMapper;
 import com.foxconn.eduservice.service.EduCourseDescriptionService;
 import com.foxconn.eduservice.service.EduCourseService;
+import com.foxconn.enums.ResultCode;
 import com.foxconn.servicebase.exception.BaseExceptionHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,47 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new BaseExceptionHandler(20001, "添加课程简介失败");
         }
         return courseId;
+    }
+
+    /**
+     * 根据课程id查询课程相关信息
+     *
+     * @return 课程信息
+     */
+    @Transactional
+    public CourseInfoVo getCourseById(String courseId) {
+        try {
+            EduCourse eduCourse = baseMapper.selectById(courseId);
+            EduCourseDescription eduCourseDescription = eduCourseDescriptionService.getById(courseId);
+            CourseInfoVo courseInfoVo = new CourseInfoVo();
+            BeanUtils.copyProperties(eduCourse, courseInfoVo);
+            courseInfoVo.setDescription(eduCourseDescription.getDescription());
+            return courseInfoVo;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseExceptionHandler(ResultCode.GET_COURSE_INFO_ERROR.getCode(), ResultCode.GET_COURSE_INFO_ERROR.getMsg());
+        }
+    }
+
+    /**
+     * 更新课程信息
+     *
+     * @param courseInfoVo 课程信息VO类
+     * @return
+     */
+    @Transactional
+    public void updateCourseInfo(CourseInfoVo courseInfoVo) {
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfoVo, eduCourse);
+        EduCourseDescription eduCourseDescription = new EduCourseDescription();
+        BeanUtils.copyProperties(courseInfoVo, eduCourseDescription);
+        try {
+            baseMapper.updateById(eduCourse);
+            eduCourseDescriptionService.updateById(eduCourseDescription);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseExceptionHandler(ResultCode.UPDATE_COURSE_INFO_ERROR.getCode(), ResultCode.UPDATE_COURSE_INFO_ERROR.getMsg());
+        }
+
     }
 }

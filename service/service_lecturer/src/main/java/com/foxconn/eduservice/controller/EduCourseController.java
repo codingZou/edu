@@ -28,5 +28,17 @@ public class EduCourseController {
         String courseId = eduCourseService.saveCouresInfo(courseInfoVo);
         return Result.ok().data("courseId", courseId);
     }
+
+    @GetMapping("/course/{courseId}")
+    public Result getCourseInfoByCourseId(@PathVariable String courseId) {
+        CourseInfoVo courseInfoVo = eduCourseService.getCourseById(courseId);
+        return Result.ok().data("courseInfoVo", courseInfoVo);
+    }
+
+    @PutMapping("/course")
+    public Result updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
+        eduCourseService.updateCourseInfo(courseInfoVo);
+        return Result.ok();
+    }
 }
 

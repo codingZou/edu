@@ -23,13 +23,13 @@ import java.util.List;
  * @since 2020-05-03
  */
 @RestController
-@RequestMapping("/eduservice/lecturer")
+@RequestMapping("/eduservice")
 @CrossOrigin
 public class EduTeacherController {
     @Autowired
     private EduTeacherService eduTeacherService;
 
-    @GetMapping("teacher")
+    @GetMapping("/teacher")
     public Result findTeachers() {
         List<EduTeacher> eduTeachers = eduTeacherService.list(null);
         return Result.ok().data("eduTeachers", eduTeachers);
@@ -41,7 +41,7 @@ public class EduTeacherController {
      * @param id
      * @return
      */
-    @DeleteMapping("teacher/{id}")
+    @DeleteMapping("/teacher/{id}")
     public Result removeTeacherById(@PathVariable String id) {
         boolean flag = eduTeacherService.removeById(id);
         if (flag) {
@@ -50,7 +50,7 @@ public class EduTeacherController {
         return Result.error();
     }
 
-    @GetMapping("teachers/{current}/{limit}")
+    @GetMapping("/teachers/{current}/{limit}")
     public Result listTeachers(@PathVariable long current, @PathVariable long limit) {
         Page<EduTeacher> eduTeacherPage = new Page<>(current, limit);
         eduTeacherService.page(eduTeacherPage, null);
@@ -68,7 +68,7 @@ public class EduTeacherController {
      * @param limit        每页条数
      * @return
      */
-    @PostMapping("conditionteacher/{current}/{limit}")
+    @PostMapping("/conditionteacher/{current}/{limit}")
     public Result conditiontListTeachers(@RequestBody(required = false) TeacherQuery teacherQuery, @PathVariable long current, @PathVariable long limit) {
         Page<EduTeacher> eduTeacherPage = new Page<>(current, limit);
         QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper<>();
@@ -101,7 +101,7 @@ public class EduTeacherController {
      * @param eduTeacher 讲师对象
      * @return
      */
-    @PostMapping("teacher")
+    @PostMapping("/teacher")
     public Result saveTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean flag = eduTeacherService.save(eduTeacher);
         if (flag) {
@@ -111,13 +111,13 @@ public class EduTeacherController {
     }
 
     @ApiOperation(value = "根据ID查询讲师")
-    @GetMapping("teacher/{id}")
+    @GetMapping("/teacher/{id}")
     public Result getTeacherById(@PathVariable String id) {
         EduTeacher eduTeacher = eduTeacherService.getById(id);
         return Result.ok().data("eduTeacher", eduTeacher);
     }
 
-    @PutMapping("teacher")
+    @PutMapping("/teacher")
     public Result updateTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean flag = eduTeacherService.updateById(eduTeacher);
         if (flag) {
