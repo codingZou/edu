@@ -3,6 +3,7 @@ package com.foxconn.eduservice.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.foxconn.eduservice.domain.EduCourse;
 import com.foxconn.eduservice.domain.vo.CourseInfoVo;
+import com.foxconn.eduservice.domain.vo.CoursePublishVo;
 
 /**
  * <p>
@@ -19,4 +20,6 @@ public interface EduCourseService extends IService<EduCourse> {
     CourseInfoVo getCourseById(String courseId);
 
     void updateCourseInfo(CourseInfoVo courseInfoVo);
+
+    CoursePublishVo getCoursePublishVoInfo(String courseId);
 }

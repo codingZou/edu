@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.foxconn.eduservice.domain.EduCourse;
 import com.foxconn.eduservice.domain.EduCourseDescription;
 import com.foxconn.eduservice.domain.vo.CourseInfoVo;
+import com.foxconn.eduservice.domain.vo.CoursePublishVo;
 import com.foxconn.eduservice.mapper.EduCourseMapper;
 import com.foxconn.eduservice.service.EduCourseDescriptionService;
 import com.foxconn.eduservice.service.EduCourseService;
@@ -26,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Autowired
+    private EduCourseMapper eduCourseMapper;
 
     @Transactional
     public String saveCouresInfo(CourseInfoVo courseInfoVo) {
@@ -88,5 +91,16 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new BaseExceptionHandler(ResultCode.UPDATE_COURSE_INFO_ERROR.getCode(), ResultCode.UPDATE_COURSE_INFO_ERROR.getMsg());
         }
 
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishVoInfo(String courseId) {
+        try {
+            return eduCourseMapper.getPublishCourseInfoById(courseId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseExceptionHandler(ResultCode.GET_COURSE_PUBLISH_ERROR.getCode(),
+                    ResultCode.GET_COURSE_PUBLISH_ERROR.getMsg());
+        }
     }
 }

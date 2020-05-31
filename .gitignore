@@ -47,12 +47,10 @@ service/service-oss/src/test/
 /HELP.md
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/EduChapterMapper.java
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/EduCourseDescriptionMapper.java
-service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/EduCourseMapper.java
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/EduSubjectMapper.java
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/EduVideoMapper.java
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/xml/EduChapterMapper.xml
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/xml/EduCourseDescriptionMapper.xml
-service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/xml/EduCourseMapper.xml
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/xml/EduSubjectMapper.xml
 service/service_lecturer/src/main/java/com/foxconn/eduservice/mapper/xml/EduVideoMapper.xml
 service/service_oss/src/test/

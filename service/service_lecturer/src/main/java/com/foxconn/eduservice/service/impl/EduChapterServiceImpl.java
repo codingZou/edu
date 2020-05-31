@@ -9,9 +9,12 @@ import com.foxconn.eduservice.domain.vo.VideoVo;
 import com.foxconn.eduservice.mapper.EduChapterMapper;
 import com.foxconn.eduservice.service.EduChapterService;
 import com.foxconn.eduservice.service.EduVideoService;
+import com.foxconn.enums.ResultCode;
+import com.foxconn.servicebase.exception.BaseExceptionHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,5 +60,17 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         }
 
         return chapterVoList;
+    }
+
+    @Transactional
+    public boolean deleteChapterById(String chapterId) {
+        QueryWrapper<EduVideo> eduVideoWrapper = new QueryWrapper<>();
+        eduVideoWrapper.eq("chapter_id", chapterId);
+        int count = eduVideoService.count(eduVideoWrapper);
+        if (count > 0) { //判断该章节存在小节不允许删除
+            throw new BaseExceptionHandler(ResultCode.DELETE_CHAPTER_WARMING.getCode(), ResultCode.DELETE_CHAPTER_WARMING.getMsg());
+        }
+        int result = baseMapper.deleteById(chapterId);
+        return result > 0;
     }
 }
