@@ -1,9 +1,9 @@
 package com.foxconn.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.foxconn.eduservice.domain.EduCourseDescription;
 import com.foxconn.eduservice.mapper.EduCourseDescriptionMapper;
 import com.foxconn.eduservice.service.EduCourseDescriptionService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

@@ -15,6 +15,7 @@ public enum ResultCode {
     UPDATE_COURSE_INFO_ERROR(40001, "更新课程信息或简介失败"),
     SAVE_CHAPTER_ERROR(40002, "保存章节失败"),
     DELETE_CHAPTER_WARMING(60001, "该章节下还存在小节不能删除"),
+    DELETE_COURSE_ERROR(50001, "删除课程失败"),
     ;
     private int code;
     private String msg;

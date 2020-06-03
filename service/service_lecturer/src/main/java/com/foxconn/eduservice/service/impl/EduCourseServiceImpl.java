@@ -1,19 +1,25 @@
 package com.foxconn.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.foxconn.eduservice.domain.EduCourse;
 import com.foxconn.eduservice.domain.EduCourseDescription;
 import com.foxconn.eduservice.domain.vo.CourseInfoVo;
 import com.foxconn.eduservice.domain.vo.CoursePublishVo;
+import com.foxconn.eduservice.domain.vo.CourseQuery;
 import com.foxconn.eduservice.mapper.EduCourseMapper;
+import com.foxconn.eduservice.service.EduChapterService;
 import com.foxconn.eduservice.service.EduCourseDescriptionService;
 import com.foxconn.eduservice.service.EduCourseService;
+import com.foxconn.eduservice.service.EduVideoService;
 import com.foxconn.enums.ResultCode;
 import com.foxconn.servicebase.exception.BaseExceptionHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 /**
  * <p>
@@ -27,6 +33,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Autowired
+    private EduVideoService eduVideoService;
+    @Autowired
+    private EduChapterService eduChapterService;
     @Autowired
     private EduCourseMapper eduCourseMapper;
 
@@ -101,6 +111,47 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             e.printStackTrace();
             throw new BaseExceptionHandler(ResultCode.GET_COURSE_PUBLISH_ERROR.getCode(),
                     ResultCode.GET_COURSE_PUBLISH_ERROR.getMsg());
+        }
+    }
+
+    public void pagingCourse(Page<EduCourse> pageParam, CourseQuery courseQuery) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        String title = courseQuery.getTitle();
+        String teacherId = courseQuery.getTeacherId();
+        String subjectParentId = courseQuery.getSubjectParentId();
+        String subjectId = courseQuery.getSubjectId();
+        if (!StringUtils.isEmpty(title)) {
+            queryWrapper.like("title", title);
+        }
+        if (!StringUtils.isEmpty(teacherId)) {
+            queryWrapper.eq("teacher_id", teacherId);
+        }
+        if (!StringUtils.isEmpty(subjectParentId)) {
+            queryWrapper.eq("subject_parent_id", subjectParentId);
+        }
+        if (!StringUtils.isEmpty(subjectId)) {
+            queryWrapper.eq("subject_id", subjectId);
+        }
+        queryWrapper.orderByDesc("gmt_create");
+        baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    @Transactional
+    public boolean deleteCourse(String courseId) {
+        try {
+            //小节
+            eduVideoService.deleteVideoByCourseId(courseId);
+            //章节
+            eduChapterService.deleteChapterByCourseId(courseId);
+            //描述
+            eduCourseDescriptionService.removeById(courseId);
+            //课程
+            baseMapper.deleteById(courseId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseExceptionHandler(ResultCode.DELETE_COURSE_ERROR.getCode(),
+                    ResultCode.DELETE_COURSE_ERROR.getMsg());
         }
     }
 }

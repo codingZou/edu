@@ -1,5 +1,6 @@
 package com.foxconn.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.foxconn.eduservice.domain.EduVideo;
 import com.foxconn.eduservice.mapper.EduVideoMapper;
 import com.foxconn.eduservice.service.EduVideoService;
@@ -17,4 +18,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> implements EduVideoService {
 
+
+    // TODO 需删除对应的视频文件
+    public void deleteVideoByCourseId(String courseId) {
+        QueryWrapper<EduVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("course_id", courseId);
+        baseMapper.delete(queryWrapper);
+    }
 }

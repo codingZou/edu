@@ -1,9 +1,11 @@
 package com.foxconn.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.foxconn.eduservice.domain.EduCourse;
 import com.foxconn.eduservice.domain.vo.CourseInfoVo;
 import com.foxconn.eduservice.domain.vo.CoursePublishVo;
+import com.foxconn.eduservice.domain.vo.CourseQuery;
 
 /**
  * <p>
@@ -22,4 +24,8 @@ public interface EduCourseService extends IService<EduCourse> {
     void updateCourseInfo(CourseInfoVo courseInfoVo);
 
     CoursePublishVo getCoursePublishVoInfo(String courseId);
+
+    void pagingCourse(Page<EduCourse> pageParam, CourseQuery courseQuery);
+
+    boolean deleteCourse(String courseId);
 }

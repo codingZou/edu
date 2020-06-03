@@ -73,4 +73,11 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         int result = baseMapper.deleteById(chapterId);
         return result > 0;
     }
+
+    @Override
+    public void deleteChapterByCourseId(String courseId) {
+        QueryWrapper<EduChapter> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("course_id", courseId);
+        baseMapper.delete(queryWrapper);
+    }
 }
