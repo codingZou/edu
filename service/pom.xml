@@ -13,6 +13,7 @@
     <modules>
         <module>service_lecturer</module>
         <module>service_oss</module>
+        <module>service_vod</module>
     </modules>
 
     <dependencies>
