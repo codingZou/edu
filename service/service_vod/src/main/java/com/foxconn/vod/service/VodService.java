@@ -8,4 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface VodService {
     String uploadVideoToAly(MultipartFile file);
+
+    void deleteVideoBySourceId(String sourceId);
 }

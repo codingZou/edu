@@ -49,7 +49,7 @@ public class EduVideo implements Serializable {
     private Long playCount;
 
     @ApiModelProperty(value = "是否可以试听：0免费 1收费")
-    private Boolean isFree;
+    private String isFree;
 
     @ApiModelProperty(value = "视频资源")
     private String videoSourceId;

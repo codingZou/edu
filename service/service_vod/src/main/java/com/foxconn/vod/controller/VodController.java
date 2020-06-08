@@ -3,10 +3,7 @@ package com.foxconn.vod.controller;
 import com.foxconn.util.Result;
 import com.foxconn.vod.service.VodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -30,5 +27,11 @@ public class VodController {
     public Result uploadVideo(MultipartFile file) {
         String videoId = vodService.uploadVideoToAly(file);
         return Result.ok().data("videoId", videoId);
+    }
+
+    @DeleteMapping("video/{sourceId}")
+    public Result deleteVideoBySourceId(@PathVariable String sourceId) {
+        vodService.deleteVideoBySourceId(sourceId);
+        return Result.ok();
     }
 }
