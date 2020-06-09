@@ -1,10 +1,12 @@
 package com.foxconn.eduservice.controller;
 
 
+import com.foxconn.eduservice.client.VodClient;
 import com.foxconn.eduservice.domain.EduVideo;
 import com.foxconn.eduservice.service.EduVideoService;
 import com.foxconn.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 public class EduVideoController {
     @Autowired
     private EduVideoService eduVideoService;
+    @Autowired
+    private VodClient vodClient;
 
     @GetMapping("/{videoId}")
     public Result getVideoById(@PathVariable String videoId) {
@@ -40,11 +44,22 @@ public class EduVideoController {
         return flag ? Result.ok() : Result.error();
     }
 
-    //TODO 删除小节时需要把视频删除
+    /**
+     * 删除小节和视频
+     *
+     * @param videoId 小节id
+     * @return
+     */
     @DeleteMapping("/{videoId}")
     public Result deleteVideo(@PathVariable String videoId) {
+        EduVideo eduVideo = eduVideoService.getById(videoId);
+        String sourceId = eduVideo.getVideoSourceId(); //根据小节id得到视频id
+        if (!StringUtils.isEmpty(sourceId)) { //当视频id不为空时删除
+            vodClient.deleteVideoBySourceId(sourceId);
+        }
         boolean flag = eduVideoService.removeById(videoId);
         return flag ? Result.ok() : Result.error();
     }
+
 }
 

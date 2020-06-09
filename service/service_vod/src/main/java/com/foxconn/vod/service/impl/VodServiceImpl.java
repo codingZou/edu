@@ -11,11 +11,13 @@ import com.foxconn.servicebase.exception.BaseExceptionHandler;
 import com.foxconn.vod.service.VodService;
 import com.foxconn.vod.utils.ConstantPropertiesUtil;
 import com.foxconn.vod.utils.InitVodCilent;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author zj
@@ -61,6 +63,27 @@ public class VodServiceImpl implements VodService {
             DeleteVideoRequest request = new DeleteVideoRequest();
             //支持传入多个视频ID，多个用逗号分隔
             request.setVideoIds(sourceId);
+            client.getAcsResponse(request);
+        } catch (ClientException e) {
+            e.printStackTrace();
+            throw new BaseExceptionHandler(ResultCode.DELETE_VOD_ERROR.getCode(),
+                    ResultCode.DELETE_VOD_ERROR.getMsg());
+        }
+    }
+
+    /**
+     * 批量删除aly视频
+     *
+     * @param sourceIds 视频id集合
+     */
+    public void batchDelVideoBySourceId(List sourceIds) {
+        try {
+            DefaultAcsClient client = InitVodCilent.initVodClient(ConstantPropertiesUtil.ACCESS_KEY_ID,
+                    ConstantPropertiesUtil.ACCESS_KEY_SECRET);
+            DeleteVideoRequest request = new DeleteVideoRequest();
+            //支持传入多个视频ID，多个用逗号分隔
+            String ids = StringUtils.join(sourceIds.toArray(), ",");
+            request.setVideoIds(ids);
             client.getAcsResponse(request);
         } catch (ClientException e) {
             e.printStackTrace();

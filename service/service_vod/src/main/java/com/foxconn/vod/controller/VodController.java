@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * @author zj
  * @create 2020-06-04 21:26
@@ -29,9 +31,15 @@ public class VodController {
         return Result.ok().data("videoId", videoId);
     }
 
-    @DeleteMapping("video/{sourceId}")
+    @DeleteMapping("/video/{sourceId}")
     public Result deleteVideoBySourceId(@PathVariable String sourceId) {
         vodService.deleteVideoBySourceId(sourceId);
+        return Result.ok();
+    }
+
+    @DeleteMapping("/video")
+    public Result batchDelVideoBySourceId(@RequestParam("sourceId") List<String> sourceIds) {
+        vodService.batchDelVideoBySourceId(sourceIds);
         return Result.ok();
     }
 }
