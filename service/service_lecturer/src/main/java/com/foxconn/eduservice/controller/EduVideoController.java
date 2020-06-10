@@ -4,6 +4,8 @@ package com.foxconn.eduservice.controller;
 import com.foxconn.eduservice.client.VodClient;
 import com.foxconn.eduservice.domain.EduVideo;
 import com.foxconn.eduservice.service.EduVideoService;
+import com.foxconn.enums.ResultCode;
+import com.foxconn.servicebase.exception.BaseExceptionHandler;
 import com.foxconn.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -55,7 +57,11 @@ public class EduVideoController {
         EduVideo eduVideo = eduVideoService.getById(videoId);
         String sourceId = eduVideo.getVideoSourceId(); //根据小节id得到视频id
         if (!StringUtils.isEmpty(sourceId)) { //当视频id不为空时删除
-            vodClient.deleteVideoBySourceId(sourceId);
+            Result result = vodClient.deleteVideoBySourceId(sourceId);
+            if (!result.getSuccess()) {
+                throw new BaseExceptionHandler(ResultCode.DELETE_VOD_TIME_OUT.getCode(),
+                        ResultCode.BATCH_DELETE_VOD_TIME_OUT.getMsg());
+            }
         }
         boolean flag = eduVideoService.removeById(videoId);
         return flag ? Result.ok() : Result.error();
