@@ -17,9 +17,12 @@ import com.foxconn.enums.ResultCode;
 import com.foxconn.servicebase.exception.BaseExceptionHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * <p>
@@ -153,5 +156,19 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new BaseExceptionHandler(ResultCode.DELETE_COURSE_ERROR.getCode(),
                     ResultCode.DELETE_COURSE_ERROR.getMsg());
         }
+    }
+
+    /**
+     * 查询热门课程
+     *
+     * @return
+     */
+    @Override
+    @Cacheable(value = "courses", key = "'courses'")
+    public List<EduCourse> listHotCourses() {
+        QueryWrapper<EduCourse> courseQueryWrapper = new QueryWrapper<>();
+        courseQueryWrapper.orderByDesc("id");
+        courseQueryWrapper.last("LIMIT 8");
+        return baseMapper.selectList(courseQueryWrapper);
     }
 }

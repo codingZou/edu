@@ -7,6 +7,8 @@ import com.foxconn.eduservice.domain.vo.CourseInfoVo;
 import com.foxconn.eduservice.domain.vo.CoursePublishVo;
 import com.foxconn.eduservice.domain.vo.CourseQuery;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务类
@@ -28,4 +30,6 @@ public interface EduCourseService extends IService<EduCourse> {
     void pagingCourse(Page<EduCourse> pageParam, CourseQuery courseQuery);
 
     boolean deleteCourse(String courseId);
+
+    List<EduCourse> listHotCourses();
 }

@@ -1,6 +1,5 @@
 package com.foxconn.eduservice.controller.front;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.foxconn.eduservice.domain.EduCourse;
 import com.foxconn.eduservice.domain.EduTeacher;
 import com.foxconn.eduservice.service.EduCourseService;
@@ -27,20 +26,17 @@ public class IndexFrontController {
     @Autowired
     private EduCourseService courseService;
 
+    /**
+     * 首页查询热门课程与热门老师
+     *
+     * @return
+     */
     @GetMapping("/index")
-    public Result findTeachers() {
+    public Result findHotTeachersAndHotCourses() {
         //查询热门课程
-        QueryWrapper<EduCourse> courseQueryWrapper = new QueryWrapper<>();
-        courseQueryWrapper.orderByDesc("id");
-        courseQueryWrapper.last("LIMIT 8");
-        List<EduCourse> courses = courseService.list(courseQueryWrapper);
-
+        List<EduCourse> courses = courseService.listHotCourses();
         //查询热门讲师
-        QueryWrapper<EduTeacher> teacherQueryWrapper = new QueryWrapper<>();
-        teacherQueryWrapper.orderByDesc("id");
-        teacherQueryWrapper.last("LIMIT 4");
-        List<EduTeacher> teachers = teacherService.list(teacherQueryWrapper);
-
+        List<EduTeacher> teachers = teacherService.listHotTeachers();
         return Result.ok().data("teachers", teachers).data("courses", courses);
     }
 }
