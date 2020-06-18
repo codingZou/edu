@@ -19,6 +19,7 @@ public enum ResultCode {
     DELETE_VOD_ERROR(50002, "删除视频失败"),
     DELETE_VOD_TIME_OUT(50003, "删除视频超时"),
     BATCH_DELETE_VOD_TIME_OUT(50004, "批量删除视频超时"),
+    SEND_MSG_FAIL(80001, "发送短信失败"),
     UPLOAD_VIDEO_ERROR(70001, "上传视频失败");
     private int code;
     private String msg;
