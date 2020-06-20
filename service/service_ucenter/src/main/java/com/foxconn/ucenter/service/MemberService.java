@@ -16,5 +16,5 @@ public interface MemberService extends IService<Member> {
 
     String login(Member member);
 
-    boolean regist(RegisterVo registerVo);
+    boolean register(RegisterVo registerVo);
 }

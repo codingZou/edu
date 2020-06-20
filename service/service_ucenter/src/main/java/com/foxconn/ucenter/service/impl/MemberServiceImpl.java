@@ -64,7 +64,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
      * @return
      */
     @Override
-    public boolean regist(RegisterVo registerVo) {
+    public boolean register(RegisterVo registerVo) {
         String mobile = registerVo.getMobile();
         String password = registerVo.getPassword();
         String code = registerVo.getCode();

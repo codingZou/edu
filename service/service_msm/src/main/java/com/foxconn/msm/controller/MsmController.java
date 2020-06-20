@@ -31,7 +31,7 @@ public class MsmController {
      * @param phoneNumber 手机号码
      * @return
      */
-    @GetMapping("/message/{phoneNumber}")
+    @GetMapping("/msg/{phoneNumber}")
     public Result sendMsg(@PathVariable String phoneNumber) {
         //从redis中获取验证码
         String code = redisTemplate.opsForValue().get(phoneNumber);
