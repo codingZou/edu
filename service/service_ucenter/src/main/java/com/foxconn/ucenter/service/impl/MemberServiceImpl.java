@@ -94,4 +94,17 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         }
         return count > 0;
     }
+
+    /**
+     * 根据openId查询用户信息
+     *
+     * @param openId 微信openId
+     * @return
+     */
+    @Override
+    public Member getByOpenid(String openId) {
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid", openId);
+        return baseMapper.selectOne(queryWrapper);
+    }
 }
