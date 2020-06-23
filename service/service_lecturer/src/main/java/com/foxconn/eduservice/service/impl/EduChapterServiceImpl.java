@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * <p>
- * 课程 服务实现类
+ * 课程章节 服务实现类
  * </p>
  *
  * @author zj

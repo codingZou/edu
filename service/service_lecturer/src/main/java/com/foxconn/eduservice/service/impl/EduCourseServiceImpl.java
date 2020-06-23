@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.foxconn.eduservice.domain.EduCourse;
 import com.foxconn.eduservice.domain.EduCourseDescription;
+import com.foxconn.eduservice.domain.frontvo.CourseFrontQueryVo;
+import com.foxconn.eduservice.domain.frontvo.CourseWebVo;
 import com.foxconn.eduservice.domain.vo.CourseInfoVo;
 import com.foxconn.eduservice.domain.vo.CoursePublishVo;
 import com.foxconn.eduservice.domain.vo.CourseQuery;
@@ -22,7 +24,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -170,5 +174,67 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         courseQueryWrapper.orderByDesc("id");
         courseQueryWrapper.last("LIMIT 8");
         return baseMapper.selectList(courseQueryWrapper);
+    }
+
+    /**
+     * 前台接口条件分页查询课程列表
+     *
+     * @param coursePage
+     * @param courseFrontQueryVo
+     * @return
+     */
+    @Override
+    @Transactional
+    public Map<String, Object> getFrontCourses(Page<EduCourse> coursePage, CourseFrontQueryVo courseFrontQueryVo) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(courseFrontQueryVo.getSubjectParentId())) {// 一级分类
+            queryWrapper.eq("subject_parent_id", courseFrontQueryVo.getSubjectParentId());
+        }
+
+        if (!StringUtils.isEmpty(courseFrontQueryVo.getSubjectId())) {// 二级分类
+            queryWrapper.eq("subject_id", courseFrontQueryVo.getSubjectId());
+        }
+
+        if (!StringUtils.isEmpty(courseFrontQueryVo.getBuyCountSort())) {// 购买数量
+            queryWrapper.orderByDesc("buy_count");
+        }
+
+        if (!StringUtils.isEmpty(courseFrontQueryVo.getGmtCreateSort())) {// 创建时间
+            queryWrapper.orderByDesc("gmt_create");
+        }
+
+        if (!StringUtils.isEmpty(courseFrontQueryVo.getPriceSort())) {// 价格
+            queryWrapper.orderByDesc("price");
+        }
+        baseMapper.selectPage(coursePage, queryWrapper);
+
+        List<EduCourse> records = coursePage.getRecords();
+        long current = coursePage.getCurrent();
+        long pages = coursePage.getPages();
+        long size = coursePage.getSize();
+        long total = coursePage.getTotal();
+        boolean hasNext = coursePage.hasNext();
+        boolean hasPrevious = coursePage.hasPrevious();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
+    }
+
+    /**
+     * 根据课程id查询课程信息和视频
+     *
+     * @param courseId
+     * @return
+     */
+    @Override
+    public CourseWebVo getCourseInfo(String courseId) {
+        return eduCourseMapper.getCourseInfoById(courseId);
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- * 课程科目 前端控制器
+ * 课程分类 前端控制器
  * </p>
  *
  * @author zj
