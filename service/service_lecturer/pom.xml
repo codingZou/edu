@@ -12,11 +12,11 @@
     <artifactId>service_lecturer</artifactId>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
-        <!--<dependency>-->
-        <!--<groupId>com.alibaba</groupId>-->
-        <!--<artifactId>easyexcel</artifactId>-->
-        <!--<version>2.1.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
 
     <!-- 项目打包时会将java目录中的*.xml文件也进行打包 -->

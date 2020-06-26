@@ -19,7 +19,7 @@
         WHERE c.id = #{courseId}
     </select>
 
-    <select id="getCourseInfoById" resultType="com.foxconn.eduservice.vo.CourseWebVo">
+    <select id="getCourseInfoById" resultType="com.foxconn.eduservice.domain.frontvo.CourseWebVo">
         SELECT c.id,
                c.title,
                c.cover,
