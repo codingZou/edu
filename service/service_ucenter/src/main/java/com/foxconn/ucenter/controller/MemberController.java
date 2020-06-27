@@ -54,5 +54,11 @@ public class MemberController {
         }
     }
 
+    @ApiOperation(value = "根据用户id获取会员信息")
+    @GetMapping("/info/{uid}")
+    public Member getLoginInfo(@PathVariable String uid) {
+        return memberService.getById(uid);
+    }
+
 }
 

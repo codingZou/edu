@@ -30,7 +30,6 @@ public class CourseFrontController {
     @PostMapping("/courses/page/{current}/{limit}")
     public Result conditionPageCourse(@RequestBody(required = false) CourseFrontQueryVo courseFrontQueryVo,
                                       @PathVariable long current, @PathVariable long limit) {
-
         Page<EduCourse> coursePage = new Page<>(current, limit);
         Map<String, Object> courseMap = courseService.getFrontCourses(coursePage, courseFrontQueryVo);
         return Result.ok().data(courseMap);
