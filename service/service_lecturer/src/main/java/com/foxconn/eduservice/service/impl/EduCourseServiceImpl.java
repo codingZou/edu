@@ -208,22 +208,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
         baseMapper.selectPage(coursePage, queryWrapper);
 
-        List<EduCourse> records = coursePage.getRecords();
-        long current = coursePage.getCurrent();
-        long pages = coursePage.getPages();
-        long size = coursePage.getSize();
-        long total = coursePage.getTotal();
-        boolean hasNext = coursePage.hasNext();
-        boolean hasPrevious = coursePage.hasPrevious();
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("items", records);
-        map.put("current", current);
-        map.put("pages", pages);
-        map.put("size", size);
-        map.put("total", total);
-        map.put("hasNext", hasNext);
-        map.put("hasPrevious", hasPrevious);
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", coursePage.getRecords());
+        map.put("current", coursePage.getCurrent());
+        map.put("pages", coursePage.getPages());
+        map.put("size", coursePage.getSize());
+        map.put("total", coursePage.getTotal());
+        map.put("hasNext", coursePage.hasNext());
+        map.put("hasPrevious", coursePage.hasPrevious());
         return map;
     }
 

@@ -1,4 +1,4 @@
-package com.foxconn.eduservice.client;
+package com.foxconn.orderservice.client;
 
 import com.foxconn.util.vo.MemberVo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @create 2020-06-08 22:05
  */
 @Component
-@FeignClient(name = "service-ucenter", fallback = UcenterDegradeFeignClient.class)
+@FeignClient(name = "service-ucenter")
 public interface UcenterClient {
 
     @GetMapping("/ucenter/info/{uid}")
-    MemberVo getUcenterInfoByuId(@PathVariable("uid") String uid);
+    MemberVo getUcenterInfoByMemberId(@PathVariable("uid") String memberId);
 }
 

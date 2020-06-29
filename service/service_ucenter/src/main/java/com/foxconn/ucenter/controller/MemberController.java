@@ -7,7 +7,9 @@ import com.foxconn.ucenter.domain.vo.RegisterVo;
 import com.foxconn.ucenter.service.MemberService;
 import com.foxconn.util.JwtUtils;
 import com.foxconn.util.Result;
+import com.foxconn.util.vo.MemberVo;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,8 +58,11 @@ public class MemberController {
 
     @ApiOperation(value = "根据用户id获取会员信息")
     @GetMapping("/info/{uid}")
-    public Member getLoginInfo(@PathVariable String uid) {
-        return memberService.getById(uid);
+    public MemberVo getLoginInfo(@PathVariable String uid) {
+        Member member = memberService.getById(uid);
+        MemberVo memberVo = new MemberVo();
+        BeanUtils.copyProperties(member, memberVo);
+        return memberVo;
     }
 
 }

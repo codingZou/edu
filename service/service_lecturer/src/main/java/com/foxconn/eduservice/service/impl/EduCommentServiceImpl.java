@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.foxconn.eduservice.client.UcenterClient;
 import com.foxconn.eduservice.domain.EduComment;
-import com.foxconn.eduservice.domain.frontvo.UcenterMemberPay;
 import com.foxconn.eduservice.mapper.EduCommentMapper;
 import com.foxconn.eduservice.service.EduCommentService;
 import com.foxconn.servicebase.exception.BaseExceptionHandler;
+import com.foxconn.util.vo.MemberVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +53,7 @@ public class EduCommentServiceImpl extends ServiceImpl<EduCommentMapper, EduComm
     @Override
     public boolean addComment(EduComment eduComment) {
         try {
-            UcenterMemberPay userInfo = ucenterClient.getUcenterInfoByuId(eduComment.getMemberId());
+            MemberVo userInfo = ucenterClient.getUcenterInfoByuId(eduComment.getMemberId());
             eduComment.setNickname(userInfo.getNickname());
             eduComment.setAvatar(userInfo.getAvatar());
             int count = baseMapper.insert(eduComment);
